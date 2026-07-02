@@ -1,16 +1,5 @@
-# TODO
-- [ ] Fix Products table to correctly display fields from `GET api/product/getProducts` response.
-  - [ ] Update product type definitions to match API response shape.
-  - [ ] Update `ProductTable.tsx` mapping logic (id/name/category/basePrice/status/image) to use correct fields.
-  - [ ] Add safe fallbacks for missing/null fields.
-  - [ ] Ensure table renders without TypeScript/runtime errors.
-- [ ] Run typecheck/build if possible.
+- [ ] Add icon upload UI + preview + remove button to `src/components/category/UpdateCategoryCompo.tsx`
+- [ ] Update `handleSubmit` in `UpdateCategoryCompo.tsx` to submit multipart/form-data (when icon selected) including `userid`, `_id`, `cat_name`, `sub_items`
+- [x] Run `npm run lint` (or `npm run build`) to validate TypeScript/ESLint
 
 
-- [ ] Fix Products table to correctly display fields from `GET api/product/getProducts` response.
-
-  - [ ] Update product type definitions to match API response shape.
-  - [ ] Update `ProductTable.tsx` mapping logic (id/name/category/basePrice/status/image) to use correct fields.
-  - [ ] Add safe fallbacks for missing/null fields.
-  - [ ] Ensure table renders without TypeScript/runtime errors.
-- [ ] Run typecheck/build if possible.

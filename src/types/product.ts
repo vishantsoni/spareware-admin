@@ -87,6 +87,9 @@ export interface ApiProduct {
   short_description?: string;
   description?: string;
 
+  // per pcs / p_price pricing rows
+  p_price?: Array<{ inventory?: string; name?: string; value?: string }>;
+
   // used by image column in table
   f_image?: string;
   g_image?: string[];

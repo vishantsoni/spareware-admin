@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 
 import serverCallFuction from '@/lib/constantFunction';
+import { PencilIcon, Trash2Icon } from 'lucide-react';
+import Badge from '../ui/badge/Badge';
 
 type Variant = {
     _id?: string;
@@ -125,72 +127,122 @@ const CategoryCompo = () => {
                             categories.map((cat) => (
                                 <div key={String(cat._id ?? cat.cat_name ?? 'cat')} className="p-5">
 
-                                    <div className="mb-3 flex flex-col gap-1">
-                                        <div className="text-base font-semibold text-gray-900 dark:text-white/90">
-                                            {cat.cat_name || '—'}
-                                        </div>
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">ID: {cat._id || '—'}</div>
-                                    </div>
-
-                                    {cat.sub_items && cat.sub_items.length > 0 ? (
-                                        <div className="space-y-4">
-                                            {cat.sub_items.map((sub, subIndex) => (
-                                                <div
-                                                    key={String(sub._id ?? sub.model_name ?? `sub-${subIndex}`)}
-                                                    className="rounded-xl border border-gray-200 bg-gray-50 p-3 dark:border-white/[0.05] dark:bg-white/[0.02]"
-                                                >
-
-                                                    <div className="mb-2 text-sm font-medium text-gray-800 dark:text-white/90">
-                                                        Model: {sub.model_name || '—'}
-                                                    </div>
-
-                                                    {sub.years && sub.years.length > 0 ? (
-                                                        <div className="space-y-2">
-                                                            {sub.years.map((y, yearIndex) => (
-                                                                <div
-                                                                    key={String(y._id ?? y.year_val ?? `year-${yearIndex}`)}
-                                                                    className="rounded-lg bg-white p-2 dark:bg-black/10"
-                                                                >
-
-                                                                    <div className="mb-1 text-xs font-medium text-gray-700 dark:text-gray-200">
-                                                                        Year: {y.year_val ?? '—'}
-                                                                    </div>
-                                                                    <div className="flex flex-wrap gap-2">
-                                                                        {y.variants && y.variants.length > 0 ? (
-                                                                            y.variants.map((v, variantIndex) => (
-                                                                                <span
-
-                                                                                    key={String(v._id ?? v.variant_name ?? `variant-${variantIndex}`)}
-
-                                                                                    className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-700 ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-200 dark:ring-blue-500/20"
-                                                                                >
-                                                                                    {v.variant_name || '—'}
-                                                                                </span>
-                                                                            ))
-                                                                        ) : (
-                                                                            <span className="text-xs text-gray-500 dark:text-gray-400">No variants</span>
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    ) : (
-                                                        <div className="text-xs text-gray-500 dark:text-gray-400">No years</div>
-                                                    )}
+                                    <div className="mb-3 flex items-center justify-between gap-2">
+                                        <div className="flex items-center gap-3">
+                                            <div>
+                                                {cat.icon ? (
+                                                    <img
+                                                        src={cat.icon}
+                                                        alt={cat.cat_name ?? 'Category Icon'}
+                                                        className="h-10 w-10 rounded-lg object-cover ring-1 ring-gray-200 dark:ring-white/20"
+                                                    />
+                                                ) : (
+                                                    <div className="h-10 w-10 rounded-lg bg-gray-200 dark:bg-white/10" />
+                                                )}
+                                            </div>
+                                            <div className="mb-3 flex flex-col gap-1">
+                                                <div className="text-base font-semibold text-gray-900 dark:text-white/90">
+                                                    {cat.cat_name || '—'}
                                                 </div>
-                                            ))}
+                                                <div className="text-xs text-gray-500 dark:text-gray-400">ID: {cat._id || '—'}</div>
+                                            </div>
+
                                         </div>
-                                    ) : (
-                                        <div className="text-sm text-gray-500 dark:text-gray-400">No sub items.</div>
-                                    )}
+                                        <div>
+                                            <a
+                                                href={`/category/edit/${cat._id}`}
+                                                className='me-2'
+                                            >
+                                                <Badge variant="solid" color="primary" className=''>
+                                                    <PencilIcon className="h-4 w-4" />
+                                                </Badge>
+                                            </a>
+
+                                            <Badge variant="solid" color="error" className='' onClick={() => {
+                                                if (confirm(`Are you sure you want to delete category "${cat.cat_name}"?`)) {
+                                                    serverCallFuction('DELETE', `api/category/deleteCategory/${cat._id}`)
+
+                                                        .then((res) => {
+                                                            if (res && (res as any).status === 'Success') {
+                                                                setCategories((prevCategories) =>
+                                                                    prevCategories.filter((c) => c._id !== cat._id)
+                                                                );
+                                                            }
+                                                        })
+                                                        .catch((err) => {
+                                                            console.error('Error deleting category:', err);
+                                                        });
+                                                }
+                                            }}>
+                                                <Trash2Icon className="h-4 w-4" />
+                                            </Badge>
+
+                                        </div>
+                                    </div>
+                                    {
+                                        cat.sub_items && cat.sub_items.length > 0 ? (
+                                            <div className="space-y-4">
+                                                {cat.sub_items.map((sub, subIndex) => (
+                                                    <div
+                                                        key={String(sub._id ?? sub.model_name ?? `sub-${subIndex}`)}
+                                                        className="rounded-xl border border-gray-200 bg-gray-50 p-3 dark:border-white/[0.05] dark:bg-white/[0.02]"
+                                                    >
+
+                                                        <div className="mb-2 text-sm font-medium text-gray-800 dark:text-white/90">
+                                                            Model: {sub.model_name || '—'}
+                                                        </div>
+
+                                                        {sub.years && sub.years.length > 0 ? (
+                                                            <div className="space-y-2">
+                                                                {sub.years.map((y, yearIndex) => (
+                                                                    <div
+                                                                        key={String(y._id ?? y.year_val ?? `year-${yearIndex}`)}
+                                                                        className="rounded-lg bg-white p-2 dark:bg-black/10"
+                                                                    >
+
+                                                                        <div className="mb-1 text-xs font-medium text-gray-700 dark:text-gray-200">
+                                                                            Year: {y.year_val ?? '—'}
+                                                                        </div>
+                                                                        <div className="flex flex-wrap gap-2">
+                                                                            {y.variants && y.variants.length > 0 ? (
+                                                                                y.variants.map((v, variantIndex) => (
+                                                                                    <span
+
+                                                                                        key={String(v._id ?? v.variant_name ?? `variant-${variantIndex}`)}
+
+                                                                                        className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-700 ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-200 dark:ring-blue-500/20"
+                                                                                    >
+                                                                                        {v.variant_name || '—'}
+                                                                                    </span>
+                                                                                ))
+                                                                            ) : (
+                                                                                <span className="text-xs text-gray-500 dark:text-gray-400">No variants</span>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="text-xs text-gray-500 dark:text-gray-400">No years</div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className="text-sm text-gray-500 dark:text-gray-400">No sub items.</div>
+                                        )
+                                    }
+
+
                                 </div>
                             ))
                         )}
                     </div>
                 </div>
-            )}
+            )
+            }
 
-        </div>
+        </div >
     );
 };
 

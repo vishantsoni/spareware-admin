@@ -87,6 +87,7 @@ export const rolePermissions: Record<string, string[]> = {
     'add-product',
     'inventory',        
     'category',
+    'catalog',
     
     'attributes',
     'coupons',    

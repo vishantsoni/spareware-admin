@@ -92,7 +92,7 @@ const UsersCompo = () => {
                         <table className="min-w-full text-left">
                             <thead className="bg-gray-50 dark:bg-white/[0.03]">
                                 <tr>
-                                    <th className="px-5 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">ID</th>
+                                    <th className="px-5 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">S.No.</th>
                                     <th className="px-5 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">Name</th>
                                     <th className="px-5 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">Email</th>
                                     <th className="px-5 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">Phone</th>
@@ -108,9 +108,9 @@ const UsersCompo = () => {
                                         </td>
                                     </tr>
                                 ) : (
-                                    rows.map((r) => (
+                                    rows.map((r, index) => (
                                         <tr key={String(r.id)} className="hover:bg-gray-50/60 dark:hover:bg-white/[0.03]">
-                                            <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{r.id}</td>
+                                            <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{index}</td>
                                             <td className="px-5 py-4 text-sm text-gray-800 dark:text-white/90">{r.name}</td>
                                             <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{r.email}</td>
                                             <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{r.phone}</td>

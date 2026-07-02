@@ -64,28 +64,35 @@ const allNavItems: NavItem[] = [
       { name: "All Products", path: "/products", permission: 'product-list' },
       { name: "Add Product", path: "/products/add", permission: 'add-product' },
       { name: "Category", path: "/category", permission: 'category' },
-      { name: "Attributes", path: "/products/attributes", permission: 'attributes' },
+      // { name: "Attributes", path: "/products/attributes", permission: 'attributes' },
       { name: "Inventory", path: "/products/inventory", permission: 'inventory' },
     ]
   },
 
   {
-    icon: <svg xmlns="http://www.w3.org/2000/svg"
-      width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-      className="lucide lucide-circle-percent-icon lucide-circle-percent">
-      <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="M9 9h.01" /><path d="M15 15h.01" /></svg>,
-    name: "Coupons",
-    permission: 'coupons',
-    path: '/coupons'
+    icon: <TableIcon />,
+    name: "Catalog",
+    permission: "catalog",
+    path: "/catalog",
   },
+
+  // {
+  //   icon: <svg xmlns="http://www.w3.org/2000/svg"
+  //     width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+  //     className="lucide lucide-circle-percent-icon lucide-circle-percent">
+  //     <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="M9 9h.01" /><path d="M15 15h.01" /></svg>,
+  //   name: "Coupons",
+  //   permission: 'coupons',
+  //   path: '/coupons'
+  // },
   // Shared but role-filtered
 
-  {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-barcode-icon lucide-barcode"><path d="M3 5v14" /><path d="M8 5v14" /><path d="M12 5v14" /><path d="M17 5v14" /><path d="M21 5v14" /></svg>,
-    name: "Shop",
-    permission: "purchase",
-    path: "/shop",
-  },
+  // {
+  //   icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-barcode-icon lucide-barcode"><path d="M3 5v14" /><path d="M8 5v14" /><path d="M12 5v14" /><path d="M17 5v14" /><path d="M21 5v14" /></svg>,
+  //   name: "Shop",
+  //   permission: "purchase",
+  //   path: "/shop",
+  // },
 
   {
     icon: <FileIcon />,
@@ -168,24 +175,24 @@ const allNavItems: NavItem[] = [
     ]
   },
   // Distributor Specific
-  {
-    icon: <UserCircleIcon />,
-    name: "Blogs",
-    permission: "blogs",
-    subItems: [
+  // {
+  //   icon: <UserCircleIcon />,
+  //   name: "Blogs",
+  //   permission: "blogs",
+  //   subItems: [
 
-      {
-        name: "Blog",
-        path: '/blog',
-        permission: 'blog'
-      },
-      {
-        name: "Blog Categories",
-        path: '/blog/categories',
-        permission: 'blog-categories'
-      }
-    ]
-  },
+  //     {
+  //       name: "Blog",
+  //       path: '/blog',
+  //       permission: 'blog'
+  //     },
+  //     {
+  //       name: "Blog Categories",
+  //       path: '/blog/categories',
+  //       permission: 'blog-categories'
+  //     }
+  //   ]
+  // },
   {
     icon: <PencilIcon />,
     name: "CMS",
